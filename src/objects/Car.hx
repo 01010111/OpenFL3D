@@ -5,7 +5,7 @@ import openfl.events.KeyboardEvent;
 import zero.utilities.Vec2;
 
 class Car extends Stack {
-	var velocity:Vec2 = [0, 0.001];
+	var velocity = Vec2.get(0, 0.001);
 	var keys:Map<Int, Bool> = [];
 	public function new(x:Float, y:Float) {
 		super({

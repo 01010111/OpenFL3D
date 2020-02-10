@@ -35,8 +35,8 @@ class Plane3DTools {
 	public static function sort3D(plane:Sprite) {
 		var children = plane.children();
 		children.sort((c1, c2) -> {
-			var c1p:Vec2 = [c1.x, c1.y];
-			var c2p:Vec2 = [c2.x, c2.y];
+			var c1p = Vec2.get(c1.x, c1.y);
+			var c2p = Vec2.get(c2.x, c2.y);
 			c1p.angle += plane.rotation;
 			c2p.angle += plane.rotation;
 			var out = c1p.y > c2p.y ? 1 : -1;
@@ -47,7 +47,7 @@ class Plane3DTools {
 		for (i in 0...children.length) plane.setChildIndex(children[i], i);
 	}
 	public static function center(plane:Sprite, x:Float, y:Float) {
-		var offset:Vec2 = [x, y];
+		var offset = Vec2.get(x, y);
 		offset *= -plane.scaleX;
 		offset.angle += plane.rotation;
 		offset += [Game.width/2, Game.height/2];
