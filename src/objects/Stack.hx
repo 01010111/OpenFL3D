@@ -1,5 +1,7 @@
 package objects;
 
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
 import openfl.filters.DropShadowFilter;
 import openfl.display.Bitmap;
 import openfl.geom.Rectangle;
@@ -10,6 +12,8 @@ import zero.utilities.Vec2;
 import openfl.display.Sprite;
 
 class Stack extends GameObject3D {
+
+	public static var filter = new DropShadowFilter(0, 0, 0x00000, 1, 2, 2, 255);
 
 	var stack:Array<Sprite> = [];
 
@@ -25,7 +29,7 @@ class Stack extends GameObject3D {
 		super();
 		var bitmap_data = Assets.getBitmapData(options.graphic);
 		init_stack(bitmap_data, options.frame_size);
-		filters = [new DropShadowFilter(0, 0, 0x000000, 1, 1, 1, 255)];
+		if (options.outline != null && options.outline) filters = [filter];
 		position = options.position;
 	}
 
@@ -71,4 +75,5 @@ typedef StackOptions = {
 	position:Vec2,
 	graphic:String,
 	frame_size:IntPoint,
+	?outline:Bool
 }

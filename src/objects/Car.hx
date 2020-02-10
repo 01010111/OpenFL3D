@@ -11,7 +11,8 @@ class Car extends Stack {
 		super({
 			position: [x, y],
 			frame_size: [16, 16],
-			graphic: 'images/car.png'
+			graphic: 'images/car.png',
+			outline: true
 		});
 		Main.i.stage.addEventListener(KeyboardEvent.KEY_DOWN, (e) -> keys.set(e.keyCode, true));
 		Main.i.stage.addEventListener(KeyboardEvent.KEY_UP, (e) -> keys.set(e.keyCode, false));
