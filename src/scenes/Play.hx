@@ -17,7 +17,8 @@ class Play extends Scene {
 		for (i in 0...100) bg.add(new Stack({
 			position: [Game.width.get_random(), Game.height.get_random()],
 			frame_size: [16, 16],
-			graphic: 'images/tree.png'
+			graphic: 'images/tree.png',
+			outline: true
 		}));
 		addChild(bg);
 		var car = new Car(Game.width/2, Game.height/2);
