@@ -14,12 +14,7 @@ class Play extends Scene {
 		bg.fill_rect(Color.PICO_8_WHITE, 0, 0, Game.width, Game.height);
 		for (i in 0...256) bg.fill_rect(Color.PICO_8_GREEN, Game.width.get_random(), Game.height.get_random(), 4 * i % 3, 4 * i % 3);
 		for (i in 0...256) bg.fill_rect(Color.PICO_8_ORANGE, Game.width.get_random(), Game.height.get_random(), 8 * i % 3, 8 * i % 3);
-		for (i in 0...100) bg.add(new Stack({
-			position: [Game.width.get_random(), Game.height.get_random()],
-			frame_size: [16, 16],
-			graphic: 'images/tree.png',
-			outline: true
-		}));
+		for (i in 0...100) bg.add(new Tree(Game.width.get_random(), Game.height.get_random()));
 		addChild(bg);
 		var car = new Car(Game.width/2, Game.height/2);
 		bg.addChild(car);
