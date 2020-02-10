@@ -23,7 +23,6 @@ class Main extends Sprite
 			Timer.update(_);
 		}).listen('update');
 		new Game(Play);
-		addChild(new util.FPS(10, 10, 0xFFFFFF));
 	}
 
 }

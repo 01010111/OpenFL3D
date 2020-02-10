@@ -25,12 +25,11 @@ class Stack extends GameObject3D {
 		super();
 		var bitmap_data = Assets.getBitmapData(options.graphic);
 		init_stack(bitmap_data, options.frame_size);
-		filters = [new openfl.filters.DropShadowFilter(0, 0, 0x000000, 1, 1, 1, 255)];
+		filters = [new DropShadowFilter(0, 0, 0x000000, 1, 1, 1, 255)];
 		position = options.position;
 	}
 
 	function init_stack(bitmap_data:BitmapData, frame_size:IntPoint) {
-		var offset = 0;
 		for (j in 0...(bitmap_data.height/frame_size.y).floor()) for (i in 0...(bitmap_data.width/frame_size.x).floor()) {
 			var bd = new BitmapData(frame_size.x, frame_size.y, true, 0x00000000);
 			bd.copyPixels(bitmap_data, new Rectangle(i * frame_size.x, j * frame_size.y, frame_size.x, frame_size.y), new openfl.geom.Point(0, 0));
@@ -50,6 +49,8 @@ class Stack extends GameObject3D {
 	}
 
 	function update_stack() {
+		visible = on_screen();
+		if (!visible) return;
 		var offset:Vec2 = [0, 1];
 		offset.angle = -(parent.rotation + 90);
 		for (i in 0...stack.length) {

@@ -1,8 +1,8 @@
 package objects;
 
+import openfl.geom.Point;
 import zero.utilities.Vec2;
 import openfl.display.Sprite;
-import openfl.display.DisplayObject;
 
 class GameObject3D extends GameObject {
 
@@ -20,6 +20,13 @@ class GameObject3D extends GameObject {
 
 	override function update(?dt:Float) {
 		super.update(dt);
+	}
+
+	function on_screen(buffer:Float = 32) {
+		var p = localToGlobal(new Point());
+		if (p.x < -buffer || p.x > Game.width + buffer) return false;
+		if (p.y < -buffer || p.y > Game.height + buffer) return false;
+		return true;
 	}
 
 }
