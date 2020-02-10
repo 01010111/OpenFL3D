@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="app" package="com.sample.app" version="1.0.0" company="01010111" />
+	<window background="#000000" />
+	<app main="Main" path="debug" file="app" else="debug" />
+	<app main="Main" path="release" file="app" if="release" />
+	
+	<source path="src" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="zerolib" />
+	
+	<assets path="assets/images" rename="images" />
+	
+</project>
