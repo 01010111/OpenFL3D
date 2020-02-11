@@ -54,7 +54,9 @@ class Stack extends GameObject3D {
 		update_stack();
 	}
 
+	var parent_last_rotation:Float = 0;
 	function update_stack() {
+		if (parent_last_rotation == parent.rotation) return;
 		visible = on_screen();
 		if (!visible) return;
 		var offset = Vec2.get(0, 1);
@@ -65,6 +67,7 @@ class Stack extends GameObject3D {
 			offset.length += 1;
 		}
 		offset.put();
+		parent_last_rotation = parent.rotation;
 	}
 
 	function update_slice(slice:Sprite, offset:Vec2) {
