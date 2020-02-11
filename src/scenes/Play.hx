@@ -13,7 +13,7 @@ class Play extends Scene {
 		bg.set_scale(2);
 		bg.rotation = 45;
 		
-		for (i in 0...128) bg.add(new Tree(Game.width.get_random(), Game.height.get_random()));
+		for (i in 0...256) bg.add(new Tree(Game.width.get_random(), Game.height.get_random()));
 		var car = new Car(Game.width/2, Game.height/2);
 		bg.add(car);
 

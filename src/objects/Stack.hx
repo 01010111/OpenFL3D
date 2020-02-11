@@ -1,5 +1,6 @@
 package objects;
 
+import openfl.filters.DropShadowFilter;
 import openfl.filters.ShaderFilter;
 import shaders.OutlineShader;
 import openfl.display.Bitmap;
@@ -29,6 +30,7 @@ class Stack extends GameObject3D {
 		if (options.outline != null && options.outline) {
 			var shader = new shaders.OutlineShader();
 			filters = [new ShaderFilter(shader)];
+			//filters = [new DropShadowFilter(0, 0, 0, 1, 2, 2, 255)]; // <-- This looks better but doesn't work on my windows machine
 		}
 		position = options.position;
 	}

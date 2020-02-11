@@ -5,7 +5,8 @@ class Tree extends Stack {
 		super({
 			position: [x, y],
 			graphic: 'images/tree.png',
-			frame_size: [16, 16]
+			frame_size: [16, 16],
+			outline: true
 		});
 		angle = 360.get_random();
 	}
