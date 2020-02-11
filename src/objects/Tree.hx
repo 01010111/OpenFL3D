@@ -7,5 +7,6 @@ class Tree extends Stack {
 			graphic: 'images/tree.png',
 			frame_size: [16, 16]
 		});
+		angle = 360.get_random();
 	}
 }
