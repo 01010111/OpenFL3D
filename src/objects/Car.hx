@@ -1,5 +1,6 @@
 package objects;
 
+import openfl.display.Tile;
 import openfl.display.Sprite;
 import openfl.events.KeyboardEvent;
 import zero.utilities.Vec2;
@@ -44,7 +45,7 @@ class Car extends Stack {
 		if (velocity.length > 0.001) y += velocity.y * dt;
 		angle = velocity.angle;
 	}
-	override function update_slice(slice:Sprite, offset:Vec2) {
+	override function update_slice(slice:Tile, offset:Vec2) {
 		var new_offset = offset.copy();
 		new_offset.length += 1.get_random(-1) * velocity.length.map(0, 200, 0, 1);
 		super.update_slice(slice, new_offset);

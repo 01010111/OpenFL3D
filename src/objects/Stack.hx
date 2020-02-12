@@ -1,5 +1,7 @@
 package objects;
 
+import openfl.display.Tile;
+import openfl.display.Tileset;
 import openfl.filters.DropShadowFilter;
 import openfl.filters.ShaderFilter;
 import shaders.OutlineShader;
@@ -10,16 +12,18 @@ import zero.utilities.IntPoint;
 import openfl.display.BitmapData;
 import zero.utilities.Vec2;
 import openfl.display.Sprite;
+import openfl.display.Tilemap;
 
 class Stack extends GameObject3D {
 
-	var stack:Array<Sprite> = [];
+	var stack:Tilemap = new Tilemap(512, 512);
 
 	override function get_angle() {
-		return stack[0].rotation;
+		//return stack[0].rotation;
+		return stack.getTileAt(0).rotation;
 	}
 	override function set_angle(n:Float) {
-		for (sprite in stack) sprite.rotation = n;
+		for (i in 0...stack.numTiles) stack.getTileAt(i).rotation = n;
 		return n;
 	}
 
@@ -33,10 +37,21 @@ class Stack extends GameObject3D {
 			//filters = [new DropShadowFilter(0, 0, 0, 1, 2, 2, 255)]; // <-- This looks better but doesn't work on my windows machine
 		}
 		position = options.position;
+		addChild(stack);
 	}
 
 	function init_stack(bitmap_data:BitmapData, frame_size:IntPoint) {
-		for (j in 0...(bitmap_data.height/frame_size.y).floor()) for (i in 0...(bitmap_data.width/frame_size.x).floor()) {
+		var tileset = new Tileset(bitmap_data);
+		for (j in 0...(bitmap_data.height/frame_size.y).int()) for (i in 0...(bitmap_data.width/frame_size.x).int()) {
+			tileset.addRect(new Rectangle(
+				i * frame_size.x,
+				j * frame_size.y,
+				frame_size.x,
+				frame_size.y
+			));
+		}
+		stack.tileset = tileset;
+		/*for (j in 0...(bitmap_data.height/frame_size.y).floor()) for (i in 0...(bitmap_data.width/frame_size.x).floor()) {
 			var bd = new BitmapData(frame_size.x, frame_size.y, true, 0x00000000);
 			bd.copyPixels(bitmap_data, new Rectangle(i * frame_size.x, j * frame_size.y, frame_size.x, frame_size.y), new openfl.geom.Point(0, 0));
 			var bitmap = new Bitmap(bd);
@@ -46,7 +61,7 @@ class Stack extends GameObject3D {
 			sprite.addChild(bitmap);
 			addChild(sprite);
 			stack.push(sprite);
-		}
+		}*/
 	}
 
 	override function update(?dt:Float) {
@@ -61,17 +76,17 @@ class Stack extends GameObject3D {
 		if (!visible) return;
 		var offset = Vec2.get(0, 1);
 		offset.angle = -(parent.rotation + 90);
-		for (i in 0...stack.length) {
+		for (i in 0...stack.numTiles) {
 			if (i == 0) continue;
-			update_slice(stack[i], offset);
+			update_slice(stack.getTileAt(i), offset);
 			offset.length += 1;
 		}
 		offset.put();
 		parent_last_rotation = parent.rotation;
 	}
 
-	function update_slice(slice:Sprite, offset:Vec2) {
-		slice.set_position(offset.x, offset.y);
+	function update_slice(slice:Tile, offset:Vec2) {
+		//slice.set_position(offset.x, offset.y);
 	}
 
 }
