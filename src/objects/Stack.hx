@@ -16,11 +16,12 @@ import openfl.display.Tilemap;
 
 class Stack extends GameObject3D {
 
-	var stack:Tilemap = new Tilemap(512, 512);
+	var stack:Tilemap;
 
 	override function get_angle() {
 		//return stack[0].rotation;
-		return stack.getTileAt(0).rotation;
+		var tile = stack.getTileAt(0);
+		return tile == null ? 0 : tile.rotation;
 	}
 	override function set_angle(n:Float) {
 		for (i in 0...stack.numTiles) stack.getTileAt(i).rotation = n;
@@ -42,15 +43,15 @@ class Stack extends GameObject3D {
 
 	function init_stack(bitmap_data:BitmapData, frame_size:IntPoint) {
 		var tileset = new Tileset(bitmap_data);
+		stack = new Tilemap(bitmap_data.width, bitmap_data.height, tileset);
 		for (j in 0...(bitmap_data.height/frame_size.y).int()) for (i in 0...(bitmap_data.width/frame_size.x).int()) {
-			tileset.addRect(new Rectangle(
+			stack.addTile(new Tile(tileset.addRect(new Rectangle(
 				i * frame_size.x,
 				j * frame_size.y,
 				frame_size.x,
 				frame_size.y
-			));
+			))));
 		}
-		stack.tileset = tileset;
 		/*for (j in 0...(bitmap_data.height/frame_size.y).floor()) for (i in 0...(bitmap_data.width/frame_size.x).floor()) {
 			var bd = new BitmapData(frame_size.x, frame_size.y, true, 0x00000000);
 			bd.copyPixels(bitmap_data, new Rectangle(i * frame_size.x, j * frame_size.y, frame_size.x, frame_size.y), new openfl.geom.Point(0, 0));
@@ -77,7 +78,6 @@ class Stack extends GameObject3D {
 		var offset = Vec2.get(0, 1);
 		offset.angle = -(parent.rotation + 90);
 		for (i in 0...stack.numTiles) {
-			if (i == 0) continue;
 			update_slice(stack.getTileAt(i), offset);
 			offset.length += 1;
 		}
@@ -86,7 +86,8 @@ class Stack extends GameObject3D {
 	}
 
 	function update_slice(slice:Tile, offset:Vec2) {
-		//slice.set_position(offset.x, offset.y);
+		slice.x = offset.x;
+		slice.y = offset.y;
 	}
 
 }
