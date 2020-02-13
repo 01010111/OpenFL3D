@@ -9,7 +9,7 @@ class GameObject extends Sprite {
 
 	public var position(get, set):Vec2;
 	function get_position():Vec2 {
-		return [x, y];
+		return Vec2.get(x, y);
 	}
 	function set_position(v:Vec2) {
 		x = v.x;
@@ -19,7 +19,7 @@ class GameObject extends Sprite {
 
 	public var scale(get, set):Vec2;
 	function get_scale():Vec2 {
-		return [scaleX, scaleY];
+		return Vec2.get(scaleX, scaleY);
 	}
 	function set_scale(v:Vec2) {
 		scaleX = v.x;
