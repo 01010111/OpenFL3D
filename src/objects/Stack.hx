@@ -33,8 +33,7 @@ class Stack extends GameObject3D {
 		var bitmap_data = Assets.getBitmapData(options.graphic);
 		init_stack(bitmap_data, options.frame_size);
 		if (options.outline != null && options.outline) {
-			var shader = new shaders.OutlineShader();
-			filters = [new ShaderFilter(shader)];
+			filters = [new ShaderFilter(new shaders.OutlineShader())];
 			//filters = [new DropShadowFilter(0, 0, 0, 1, 2, 2, 255)]; // <-- This looks better but doesn't work on my windows machine
 		}
 		position = options.position;
@@ -43,7 +42,7 @@ class Stack extends GameObject3D {
 
 	function init_stack(bitmap_data:BitmapData, frame_size:IntPoint) {
 		var tileset = new Tileset(bitmap_data);
-		stack = new Tilemap(bitmap_data.width, bitmap_data.height, tileset);
+		stack = new Tilemap(bitmap_data.width, bitmap_data.height, tileset, false);
 		for (j in 0...(bitmap_data.height/frame_size.y).int()) for (i in 0...(bitmap_data.width/frame_size.x).int()) {
 			stack.addTile(new Tile(tileset.addRect(new Rectangle(
 				i * frame_size.x,
