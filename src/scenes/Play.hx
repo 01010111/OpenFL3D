@@ -14,12 +14,14 @@ class Play extends Scene {
 		bg.rotation = 45;
 		
 		for (i in 0...256) bg.add(new Tree(Game.width.get_random(), Game.height.get_random()));
-		var car = new Car(Game.width/2, Game.height/2);
-		bg.add(car);
+		//var car = new Car(Game.width/2, Game.height/2);
+		//bg.add(car);
+		var tank = new Tank(Game.width/2, Game.height/2);
+		bg.add(tank);
 
 		((?_) -> {
 			bg.sort3D();
-			bg.center(car.x, car.y);
+			bg.center(tank.x, tank.y);
 			//var target_angle = -car.angle - 90;
 			//while ((bg.rotation - target_angle).abs() > 180) target_angle += bg.rotation > target_angle ? 360 : -360;
 			//bg.rotation += (target_angle - bg.rotation) * 0.025;
