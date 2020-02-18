@@ -6,6 +6,8 @@ import openfl.display.Sprite;
 
 class GameObject3D extends GameObject {
 
+	public var z:Float = 0;
+
 	public var angle(get, set):Float;
 	function get_angle() {
 		return rotation;
@@ -20,6 +22,9 @@ class GameObject3D extends GameObject {
 
 	override function update(?dt:Float) {
 		super.update(dt);
+
+		// Temp Z Gravity implementation
+		if (z < 0) z = 0.max(z - Game.gravity * dt);
 	}
 
 	function on_screen(buffer:Float = 32) {

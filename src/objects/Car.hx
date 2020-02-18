@@ -6,7 +6,10 @@ import zero.utilities.Vec2;
 
 class Car extends Stack {
 	
-	var velocity = Vec2.get(0, 0.001);
+	public var velocity = Vec2.get(0, 0.001);
+	public var velocity_z(default, set) = 0.0;
+	inline function set_velocity_z(v:Float) return velocity_z = v.min(50);
+
 	var keys:Map<Int, Bool> = [];
 	public function new(x:Float, y:Float) {
 		super({
@@ -39,6 +42,7 @@ class Car extends Stack {
 		var turn_left = keys[37];
 		var turn_right = keys[39];
 		var brake = keys[40];
+		var jump = keys[32];
 
 		if (brake) velocity.length += (0.001 - velocity.length) * 0.1;
 		else if (accelerate) velocity.length += (120 - velocity.length) * 0.01;
@@ -51,6 +55,9 @@ class Car extends Stack {
 			velocity.angle += (velocity.angle.snap_to_grid(90) - velocity.angle) * velocity.length.map(0, 120, 0, 0.1);
 		}
 
+		if (z <= 0 && jump) velocity_z = 40;
+		else velocity_z = z <= 0 ? 0 : velocity_z - 50 * dt;
+
 		#if echo 
 		body.velocity.set(velocity.x, velocity.y);
 		#end
@@ -60,6 +67,7 @@ class Car extends Stack {
 		if (velocity.length > 0.001) x += velocity.x * dt;
 		if (velocity.length > 0.001) y += velocity.y * dt;
 		#end
+		z += velocity_z * dt;
 		angle = velocity.angle;
 	}
 	override function update_slice(slice:Sprite, offset:Vec2) {

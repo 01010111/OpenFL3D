@@ -29,7 +29,23 @@ class Play extends Scene {
 		addChild(new util.FPS(10, 10, 0x808090));
 
 		#if echo
-		Game.i.world.listen();
+		Game.i.world.listen(null, null, {
+			condition: (a, b, c) -> {
+				inline function handle_car_tree_collision(a:GameObject, b:GameObject) {
+					if (a.is(Tree) && b.is(Car)) {
+						var car = (cast b : Car);
+						if (car.z > 10) return false;
+						a.remove();
+						if (car.z <= 0) car.velocity.length = 0.001;
+						car.velocity_z += 40;
+						return true;
+					}
+					return false;
+				}
+				 
+				return handle_car_tree_collision(a.game_object, b.game_object) || handle_car_tree_collision(b.game_object, a.game_object);
+			}
+		});
 		#end
 	}
 

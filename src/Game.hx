@@ -15,6 +15,8 @@ class Game {
 	public static var height(get, never):Float;
 	static function get_height() return Lib.application.window.height;
 
+	public static var gravity:Float = 40;
+
 	public var scene(default, null):Scene;
 
 	#if echo
