@@ -17,7 +17,7 @@ class Car extends Stack {
 		});
 
 		#if echo
-		set_body({
+		create_body({
 			shape: {
 				type: RECT,
 				width: 16,

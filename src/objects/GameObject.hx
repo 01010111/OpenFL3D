@@ -14,7 +14,16 @@ import echo.data.Options.BodyOptions;
 class GameObject extends Sprite {
 
 	#if echo
-	public var body(default, null):Null<Body>;
+	public var body(default, set):Null<Body>;
+	inline function set_body(v:Null<Body>) {
+		if (body != null) {
+			body.remove();
+			body.game_object = null;
+		}
+		v.game_object = this;
+		Game.i.world.add(v);
+		return body = v;
+	}
 
 	override private function set_x(v:Float){
 		if (body != null) body.x = v;
@@ -101,7 +110,7 @@ class GameObject extends Sprite {
 	}
 
 	#if echo 
-	public function set_body(options:BodyOptions, ?world:World) {
+	public function create_body(options:BodyOptions, ?world:World) {
 		if (body != null) body.dispose();
 
 		if (options.x == null) options.x = x;
@@ -110,7 +119,6 @@ class GameObject extends Sprite {
 		body = new Body(options);
 
 		if (world != null) world.add(body);
-		else Game.i.world.add(body);
 
 		return body;
 	}

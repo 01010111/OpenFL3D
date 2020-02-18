@@ -12,6 +12,8 @@
 	<haxelib name="openfl" />
 	<haxelib name="zerolib" />
 	<haxelib name="echo" />
+
+	<haxeflag name="--macro" value='echo.Macros.add_data("game_object", "objects.GameObject")' />
 	
 	<assets path="assets/images" rename="images" />
 	<assets path="assets/data" rename="data" />

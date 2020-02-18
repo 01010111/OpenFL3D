@@ -11,7 +11,7 @@ class Tree extends Stack {
 		angle = 360.get_random();
 
 		#if echo
-		set_body({
+		create_body({
 			mass: 0,
 			shape: {
 				type: CIRCLE,
