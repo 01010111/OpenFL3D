@@ -11,6 +11,7 @@
 	
 	<haxelib name="openfl" />
 	<haxelib name="zerolib" />
+	<haxelib name="echo" />
 	
 	<assets path="assets/images" rename="images" />
 	<assets path="assets/data" rename="data" />

@@ -20,13 +20,17 @@ class Play extends Scene {
 		((?_) -> {
 			bg.sort3D();
 			bg.center(car.x, car.y);
-			//var target_angle = -car.angle - 90;
-			//while ((bg.rotation - target_angle).abs() > 180) target_angle += bg.rotation > target_angle ? 360 : -360;
-			//bg.rotation += (target_angle - bg.rotation) * 0.025;
+			var target_angle = -car.angle - 90;
+			while ((bg.rotation - target_angle).abs() > 180) target_angle += bg.rotation > target_angle ? 360 : -360;
+			bg.rotation += (target_angle - bg.rotation) * 0.025;
 		}).listen('update');
 		
 		addChild(bg);
 		addChild(new util.FPS(10, 10, 0x808090));
+
+		#if echo
+		Game.i.world.listen();
+		#end
 	}
 
 }

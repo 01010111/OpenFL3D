@@ -1,9 +1,13 @@
 import scenes.Scene;
 import openfl.Lib;
 
+#if echo
+import echo.World;
+#end
+
 class Game {
 
-	var scene:Scene;
+	public static var i:Game;
 
 	public static var width(get, never):Float;
 	static function get_width() return Lib.application.window.width;
@@ -11,7 +15,25 @@ class Game {
 	public static var height(get, never):Float;
 	static function get_height() return Lib.application.window.height;
 
+	public var scene(default, null):Scene;
+
+	#if echo
+	public var world(default, null):World;
+	#end
+
 	public function new(scene:Class<Scene>) {
+		i = this;
+
+		#if echo
+		world = new World({
+      width: Game.width,
+      height: Game.height
+		});
+
+		var update = (?dt) -> world.step(dt);
+		update.listen('update');
+		#end
+
 		change_scene(Type.createInstance(scene, []));
 	}
 
