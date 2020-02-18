@@ -59,7 +59,7 @@ class Stack extends GameObject3D {
 		if (parent_last_rotation == parent.rotation) return;
 		visible = on_screen();
 		if (!visible) return;
-		var offset = Vec2.get(0, 1);
+		var offset = Vec2.get(0, 1 + z);
 		offset.angle = -(parent.rotation + 90);
 		for (i in 0...stack.length) {
 			if (i == 0) continue;

@@ -9,5 +9,15 @@ class Tree extends Stack {
 			outline: true
 		});
 		angle = 360.get_random();
+
+		#if echo
+		create_body({
+			mass: 0,
+			shape: {
+				type: CIRCLE,
+				radius: 6,
+			}
+		});
+		#end
 	}
 }
