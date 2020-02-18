@@ -4,11 +4,6 @@ import openfl.display.Sprite;
 import openfl.events.KeyboardEvent;
 import zero.utilities.Vec2;
 
-#if echo
-import echo.World;
-import hxmath.math.Vector2;
-#end
-
 class Car extends Stack {
 	
 	var velocity = Vec2.get(0, 0.001);
